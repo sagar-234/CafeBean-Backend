@@ -35,8 +35,8 @@ public class BookingServiceImpl implements BookingService{
      booked.setTable_id(tableid);
      
      booked.setBookingdate(Calendar.getInstance().getTime());
-     booked.setBookingtime(Calendar.getInstance().getTime());
-     booked.setDuration(Calendar.getInstance().getTime());
+     //booked.setBookingtime(null);
+     //booked.setDuration(Calendar.getInstance().getTime());
      
      
      Booking b= bookingdao.save(booked);

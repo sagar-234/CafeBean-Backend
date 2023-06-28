@@ -21,16 +21,16 @@ public class Booking {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="booking_id",nullable=false)
+	@Column(name="booking_id")
 	private Long booking_id;
 	
-	@Column(name="Table_id",nullable=false)
+	@Column(name="Table_id")
 	private Long Table_id;
 	
-	@Column(name="cust_id",nullable=false)
+	@Column(name="cust_id")
 	private Long custid;
 	
-	@Column(name="Amount",nullable=false)
+	@Column(name="Amount")
 	private Long Amount;
 	
 	
@@ -38,85 +38,117 @@ public class Booking {
 	@Temporal(TemporalType.DATE)
 	private Date bookingdate;
 	
-	@Temporal(TemporalType.DATE)
-	private Date bookingtime;
 	
-	@Temporal(TemporalType.DATE)
-	private Date duration;
+	
+	@Temporal(TemporalType.TIME)
+	private java.util.Date bookingTime;
+
+	
+	
 
 	public Booking() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Booking(Long booking_id, Long table_id, Long custid, Long amount, Date bookingdate, Date bookingtime,
-			Date duration) {
+
+
+
+	public Booking(Long booking_id, Long table_id, Long custid, Long amount, Date bookingdate, Date bookingTime) {
 		super();
 		this.booking_id = booking_id;
 		Table_id = table_id;
 		this.custid = custid;
 		Amount = amount;
 		this.bookingdate = bookingdate;
-		this.bookingtime = bookingtime;
-		this.duration = duration;
+		this.bookingTime = bookingTime;
 	}
+
+
+
 
 	public Long getBooking_id() {
 		return booking_id;
 	}
 
+
+
+
 	public void setBooking_id(Long booking_id) {
 		this.booking_id = booking_id;
 	}
+
+
+
 
 	public Long getTable_id() {
 		return Table_id;
 	}
 
+
+
+
 	public void setTable_id(Long table_id) {
 		Table_id = table_id;
 	}
+
+
+
 
 	public Long getCustid() {
 		return custid;
 	}
 
+
+
+
 	public void setCustid(Long custid) {
 		this.custid = custid;
 	}
+
+
+
 
 	public Long getAmount() {
 		return Amount;
 	}
 
+
+
+
 	public void setAmount(Long amount) {
 		Amount = amount;
 	}
+
+
+
 
 	public Date getBookingdate() {
 		return bookingdate;
 	}
 
+
+
+
 	public void setBookingdate(Date bookingdate) {
 		this.bookingdate = bookingdate;
 	}
 
-	public Date getBookingtime() {
-		return bookingtime;
+
+
+
+	public java.util.Date getBookingTime() {
+		return bookingTime;
 	}
 
-	public void setBookingtime(Date bookingtime) {
-		this.bookingtime = bookingtime;
+
+
+
+	public void setBookingTime(java.util.Date bookingTime) {
+		this.bookingTime = bookingTime;
 	}
 
-	public Date getDuration() {
-		return duration;
-	}
-
-	public void setDuration(Date duration) {
-		this.duration = duration;
-	}
-
+	
 	
 	
 
