@@ -6,12 +6,13 @@ import java.util.List;
 
 import com.cafe.dto.BookingDto;
 import com.cafe.entity.Booking;
+import com.cafe.entity.CafeTable;
 
 public interface BookingService {
 	public Booking BookTableForUser(BookingDto booking);
 
 	public List<Booking> GetAllTheBookingOfUser(Long id);
 
-	public List<Booking>GetAvailableTables(Date BookingDate,LocalTime time);
+	public List<Long> GetAvailableTables(Date BookingDate,LocalTime time);
 
 }

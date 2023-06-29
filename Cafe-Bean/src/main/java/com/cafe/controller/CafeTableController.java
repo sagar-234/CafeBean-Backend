@@ -1,13 +1,19 @@
 package com.cafe.controller;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.text.SimpleDateFormat;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.cafe.entity.Booking;
 import com.cafe.entity.CafeTable;
@@ -31,6 +39,9 @@ import com.cafe.service.CafeTableService;
 public class CafeTableController {
 	@Autowired
 	CafeTableService cafeTableservice;
+	
+	@Autowired
+	RestTemplate restTemplate;
 	
 	private Logger logger = LoggerFactory.getLogger(Logger.class);
 	
@@ -58,5 +69,34 @@ public class CafeTableController {
 	{
 		logger.info("Creating cafeTables");
 		cafeTableservice.createcafeTable(cafeTable);
+	}
+	
+	
+	@GetMapping("/availableTable")
+	public List<CafeTable> availableCafeTable(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")  Date date,@RequestParam LocalTime time )
+	{
+		
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Specify the desired date format
+		String formattedDate = formatter.format(date); // Format the date using the formatter
+
+		
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString("http://localhost:8080/Booking-rest/getBookings")
+                .queryParam("date", formattedDate )
+                .queryParam("time", time);
+        
+        String url = builder.toUriString();
+        ResponseEntity<Long[]> response = restTemplate.exchange(url, HttpMethod.GET, null, Long[].class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            Long[] objects = response.getBody();
+           
+            return cafeTableservice.availableTables(Arrays.asList(objects));
+            
+        } else {
+            System.out.println("Request failed with status code: " + response.getStatusCodeValue());
+            return null;
+        }
+
 	}
 }

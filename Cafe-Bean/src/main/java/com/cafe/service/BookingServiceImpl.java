@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,10 +60,14 @@ public class BookingServiceImpl implements BookingService{
 		}
 	
 	
-	public List<Booking>GetAvailableTables(Date BookingDate,LocalTime time)
+	public List<Long> GetAvailableTables(Date BookingDate,LocalTime time)
 	{
 		
-		return bookingdao.findByBookingdateAndStartTimeField(BookingDate,time);
+		List<Long>tableIds=bookingdao.findByBookingdateAndStartTimeField(BookingDate,time).stream().map(i->i.getTable_id()).collect(Collectors.toList());
+		
+		//System.out.print(tableIds);
+		
+		return tableIds;
 		
 	}
 

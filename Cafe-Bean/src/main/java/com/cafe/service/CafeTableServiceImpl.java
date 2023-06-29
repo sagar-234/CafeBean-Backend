@@ -66,4 +66,9 @@ public class CafeTableServiceImpl implements CafeTableService{
 		// TODO Auto-generated method stub
 		return cafeTableDao.findAll();
 	}
+	
+	public List<CafeTable>availableTables(List<Long>arr)
+	{
+		return cafeTableDao.findAll().stream().filter(i->!arr.contains(i.getTableId())).collect(Collectors.toList());
+	}
 }

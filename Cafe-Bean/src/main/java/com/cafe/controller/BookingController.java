@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe.dto.BookingDto;
 import com.cafe.entity.Booking;
+import com.cafe.entity.CafeTable;
 import com.cafe.service.BookingService;
 
 @RequestMapping("Booking-rest")
@@ -43,7 +44,7 @@ public class BookingController {
 	}
 	
 	@GetMapping("/getBookings")
-	public List<Booking> getAllBookingsOfUser(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")  Date date,@RequestParam LocalTime time )
+	public List<Long> getAllBookingsOfUser(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")  Date date,@RequestParam LocalTime time )
 	{
 		logger.info("Retrieving List of Bookings of a User");
 		return bookingservice.GetAvailableTables(date, time);

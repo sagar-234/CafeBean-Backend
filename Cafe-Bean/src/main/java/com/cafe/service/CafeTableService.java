@@ -19,6 +19,8 @@ public interface CafeTableService {
 	List<CafeTable> getallCafeTable();
 
 	CafeTable updateCafeTable(CafeTable cafeTable);
+	
+	public List<CafeTable>availableTables(List<Long>arr);
 
 	
 	
