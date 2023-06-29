@@ -49,18 +49,20 @@ public class CoffeeItemServiceImpl implements CoffeeItemService{
 		throw new ResourceNotFoundException("Invalid User");
 		
 	}
-	public void deleteCoffeItem(Long id )
-	{
-		
-		if(customerdao.findById(id).isPresent())
-		{
-
-		coffeeitemdao.delete(coffeeitemdao.findById(id).get());
-		return;
-		}
-
-		
-	}
+	
+	
+//	public void deleteCoffeItem(Long id )
+//	{
+//		
+//		if(customerdao.findById(id).isPresent())
+//		{
+//
+//		coffeeitemdao.delete(coffeeitemdao.findById(id).get());
+//		return;
+//		}
+//
+//		
+//	}
 	
 	public List<CoffeeItem> getByUser(Long id)
 	{
@@ -87,7 +89,9 @@ public class CoffeeItemServiceImpl implements CoffeeItemService{
 	
 	public void deleteAllCoffeeItemsOfUser(Long id)
 	{
-		coffeeitemdao.deleteAllBycustid(id);
+		List<CoffeeItem>c=coffeeitemdao.findAllBycustid(id);
+		
+		coffeeitemdao.deleteAll(c);
 	}
 	
 	

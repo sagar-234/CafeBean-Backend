@@ -1,5 +1,6 @@
 package com.cafe.controller;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -10,10 +11,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cafe.dto.BookingDto;
 import com.cafe.entity.Booking;
 import com.cafe.service.BookingService;
 
@@ -26,11 +29,11 @@ public class BookingController {
 	
 	private Logger logger = LoggerFactory.getLogger(Logger.class);
 	
-	@PostMapping("/addBooking/{id}/{tableid}")
-	public Booking addBooking(@PathVariable long id,@PathVariable long tableid)
+	@PostMapping("/addBooking")
+	public Booking addBooking(@RequestBody BookingDto booking)
 	{
 		logger.info("Creating a new Booking");
-		return bookingservice.BookTableForUser(id,tableid);
+		return bookingservice.BookTableForUser(booking);
 	}
 	@GetMapping("/fetch/{id}")
 	public List<Booking> getAllBookingsOfUser(@PathVariable long id)
@@ -39,9 +42,12 @@ public class BookingController {
 		return bookingservice.GetAllTheBookingOfUser(id);
 	}
 	
-	@GetMapping("/getBookedTables")
-	public List<Booking> getBookings(@RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") Date date){
-		logger.info("Retrieving all Bookings");
-		return bookingservice.tablesBooked(date);
+	@GetMapping("/getBookings")
+	public List<Booking> getAllBookingsOfUser(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")  Date date,@RequestParam LocalTime time )
+	{
+		logger.info("Retrieving List of Bookings of a User");
+		return bookingservice.GetAvailableTables(date, time);
 	}
+	
+	
 }

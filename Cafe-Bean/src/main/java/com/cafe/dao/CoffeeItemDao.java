@@ -15,7 +15,8 @@ public interface CoffeeItemDao extends JpaRepository<CoffeeItem,Long>{
 	
 	CoffeeItem findBycustidAndCoffee(long custid,Coffee coffee);
 
-	void deleteAllBycustid(Long id);
+
+	List<CoffeeItem> findAllBycustid(Long id);
 
 
 

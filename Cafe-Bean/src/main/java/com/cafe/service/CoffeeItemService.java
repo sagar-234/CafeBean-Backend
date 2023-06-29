@@ -9,7 +9,6 @@ public interface CoffeeItemService {
 
 	public void addCoffee(Long custid,Coffee coffee);
 	
-	public void deleteCoffeItem(Long id );
 	
 	public List<CoffeeItem> getByUser(Long Id);
 	public Long amountForUserBooking(Long id);

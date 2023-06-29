@@ -1,5 +1,6 @@
 package com.cafe.dao;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface BookingDao extends JpaRepository<Booking, Long>{
 	List<Booking> findBycustid(Long id);
 
 	
-	List<Booking> findByBookingdate(Date date);
+	List<Booking> findByBookingdateAndStartTimeField(Date date,LocalTime time);
 
 	
 	

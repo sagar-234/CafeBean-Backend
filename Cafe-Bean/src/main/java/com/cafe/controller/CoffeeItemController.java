@@ -47,10 +47,10 @@ public class CoffeeItemController {
 		 coffeeitemservice.addCoffee(id, coffee);
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	public void deleteCoffeeItem(@PathVariable long id)
+	@DeleteMapping("/delete/{userid}")
+	public void deleteUserCoffeeItem(@PathVariable long userid)
 	{
-		logger.info("Deleting coffeeItem");
-		coffeeitemservice.deleteCoffeItem(id);
+		logger.info("Deleting coffeeItem of user");
+		coffeeitemservice.deleteAllCoffeeItemsOfUser(userid);
 	}
 }

@@ -1,5 +1,6 @@
 package com.cafe.service;
 
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.cafe.dao.BookingDao;
 import com.cafe.dao.CoffeeItemDao;
+import com.cafe.dto.BookingDto;
 import com.cafe.entity.Booking;
+import com.cafe.entity.CafeTable;
 import com.cafe.exception.ResourceNotFoundException;
 
 @Service
@@ -23,25 +26,25 @@ public class BookingServiceImpl implements BookingService{
 	
 	@Autowired
 	BookingDao bookingdao;
-	public Booking BookTableForUser(Long id,Long tableid) {
+	public Booking BookTableForUser(BookingDto booking) {
 		
      Booking booked=new Booking();
      
-     long price=coffeeitemservice.amountForUserBooking(id);
+     //long price=coffeeitemservice.amountForUserBooking(id);
     	 
      
-     booked.setAmount(price);
-     booked.setCustid(id);
-     booked.setTable_id(tableid);
+     booked.setAmount(booking.getAmount());
+     booked.setCustid(booking.getCustid());
+     booked.setTable_id(booking.getTable_id());
      
-     booked.setBookingdate(Calendar.getInstance().getTime());
-     //booked.setBookingtime(null);
-     //booked.setDuration(Calendar.getInstance().getTime());
+     booked.setBookingdate(booking.getBookingdate());
+     booked.setStartTimeField(booking.getStartTimeField());
+     booked.setEndTimeField(booking.getEndTimeField());
      
      
      Booking b= bookingdao.save(booked);
      
-     coffeeitemservice.getByUser(id).stream().forEach(c->coffeeitemservice.deleteCoffeItem(c.getCoffeeItemId()));
+     //coffeeitemservice.getByUser(id).stream().forEach(c->coffeeitemservice.deleteCoffeItem(c.getCoffeeItemId()));
  	
  	return b;
      
@@ -56,10 +59,16 @@ public class BookingServiceImpl implements BookingService{
 		}
 	
 	
-	public List<Booking> tablesBooked(Date date)
+	public List<Booking>GetAvailableTables(Date BookingDate,LocalTime time)
 	{
-		return bookingdao.findByBookingdate(date);
+		
+		return bookingdao.findByBookingdateAndStartTimeField(BookingDate,time);
+		
 	}
+
+	
+	
+	
 
 	
 
