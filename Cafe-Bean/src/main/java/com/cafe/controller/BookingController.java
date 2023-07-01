@@ -3,11 +3,13 @@ package com.cafe.controller;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,8 @@ import com.cafe.entity.Booking;
 import com.cafe.entity.CafeTable;
 import com.cafe.service.BookingService;
 
+
+@CrossOrigin("*")
 @RequestMapping("Booking-rest")
 @RestController
 public class BookingController {
@@ -44,10 +48,10 @@ public class BookingController {
 	}
 	
 	@GetMapping("/getBookings")
-	public List<Long> getAllBookingsOfUser(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")  Date date,@RequestParam LocalTime time )
+	public Set<Long> getAllBookingsOfUser(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")  Date date,@RequestParam LocalTime starttime)
 	{
 		logger.info("Retrieving List of Bookings of a User");
-		return bookingservice.GetAvailableTables(date, time);
+		return bookingservice.GetAvailableTables(date, starttime);
 	}
 	
 	

@@ -15,5 +15,8 @@ public interface CoffeeItemService {
 	
 	public void deleteAllCoffeeItemsOfUser(Long id);
 
+	public void updateCoffeeItem(CoffeeItem c);
+	public void deleteCoffeeItem(long id);
+
 
 }

@@ -94,6 +94,15 @@ public class CoffeeItemServiceImpl implements CoffeeItemService{
 		coffeeitemdao.deleteAll(c);
 	}
 	
+	public void updateCoffeeItem(CoffeeItem c)
+	{
+		coffeeitemdao.save(c);
+	}
+	
+	public void deleteCoffeeItem(long id)
+	{
+		coffeeitemdao.deleteById(id);
+	}
 	
 
 }

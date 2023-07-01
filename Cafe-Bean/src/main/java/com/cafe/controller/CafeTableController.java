@@ -1,8 +1,11 @@
 package com.cafe.controller;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -77,13 +80,22 @@ public class CafeTableController {
 	{
 		
 		
+		
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Specify the desired date format
 		String formattedDate = formatter.format(date); // Format the date using the formatter
 
 		
+        LocalDate currentDate =  LocalDate.now(); // Current date
+
+		if(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(currentDate))
+		{
+			throw new RuntimeException("Invalid date");
+		}
+		
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString("http://localhost:8080/Booking-rest/getBookings")
                 .queryParam("date", formattedDate )
-                .queryParam("time", time);
+                .queryParam("starttime", time);
         
         String url = builder.toUriString();
         ResponseEntity<Long[]> response = restTemplate.exchange(url, HttpMethod.GET, null, Long[].class);

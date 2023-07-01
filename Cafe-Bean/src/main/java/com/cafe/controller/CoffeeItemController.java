@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,8 @@ import com.cafe.entity.Coffee;
 import com.cafe.entity.CoffeeItem;
 import com.cafe.service.CoffeeItemService;
 
+
+@CrossOrigin("*")
 @RequestMapping("CoffeeItem-rest")
 @RestController
 public class CoffeeItemController {
@@ -46,11 +49,24 @@ public class CoffeeItemController {
 		 logger.info("Adding a coffee Item");
 		 coffeeitemservice.addCoffee(id, coffee);
 	}
-	
+	@PostMapping("/updateCoffeeItem")
+	public void updateCoffeeItem(@RequestBody CoffeeItem coffeeitem)
+	{
+		 logger.info("updating a coffee Item");
+		 coffeeitemservice.updateCoffeeItem(coffeeitem);
+		 
+	}
 	@DeleteMapping("/delete/{userid}")
 	public void deleteUserCoffeeItem(@PathVariable long userid)
 	{
 		logger.info("Deleting coffeeItem of user");
 		coffeeitemservice.deleteAllCoffeeItemsOfUser(userid);
+	}
+	
+	@DeleteMapping("/deleteCoffeeItem/{id}")
+	public void deleteCoffeeItem(@PathVariable long id)
+	{
+		logger.info("Deleting coffeeItem of id");
+		coffeeitemservice.deleteCoffeeItem(id);
 	}
 }

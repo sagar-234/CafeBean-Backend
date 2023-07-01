@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,10 @@ public class BookingServiceImpl implements BookingService{
 		
      Booking booked=new Booking();
      
-     //long price=coffeeitemservice.amountForUserBooking(id);
+     long price=coffeeitemservice.amountForUserBooking(booking.getCustid());
     	 
      
-     booked.setAmount(booking.getAmount());
+     booked.setAmount(price);
      booked.setCustid(booking.getCustid());
      booked.setTable_id(booking.getTable_id());
      
@@ -45,8 +46,8 @@ public class BookingServiceImpl implements BookingService{
      
      Booking b= bookingdao.save(booked);
      
-     //coffeeitemservice.getByUser(id).stream().forEach(c->coffeeitemservice.deleteCoffeItem(c.getCoffeeItemId()));
- 	
+    // coffeeitemservice.getByUser(booking.getCustid()).stream().forEach(c->coffeeitemservice.deleteAllCoffeeItemsOfUser(c.getCoffeeItemId()));
+     coffeeitemservice.deleteAllCoffeeItemsOfUser(booking.getCustid());
  	return b;
      
 
@@ -60,10 +61,10 @@ public class BookingServiceImpl implements BookingService{
 		}
 	
 	
-	public List<Long> GetAvailableTables(Date BookingDate,LocalTime time)
+	public Set<Long> GetAvailableTables(Date BookingDate,LocalTime starttime)
 	{
 		
-		List<Long>tableIds=bookingdao.findByBookingdateAndStartTimeField(BookingDate,time).stream().map(i->i.getTable_id()).collect(Collectors.toList());
+		Set<Long>tableIds=bookingdao.findByDateAndTimeRange(BookingDate, starttime).stream().map(i->i.getTable_id()).collect(Collectors.toSet());
 		
 		//System.out.print(tableIds);
 		
