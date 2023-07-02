@@ -15,5 +15,7 @@ public interface BookingService {
 	public List<Booking> GetAllTheBookingOfUser(Long id);
 
 	public Set<Long> GetAvailableTables(Date BookingDate,LocalTime starttime);
+	public List<Booking>getAllBookings();
+
 
 }

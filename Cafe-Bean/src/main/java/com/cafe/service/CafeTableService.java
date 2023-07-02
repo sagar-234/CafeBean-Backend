@@ -11,17 +11,20 @@ public interface CafeTableService {
 
 	
 
-	CafeTable cafeTableByID(Long cafeTableID);
+	public CafeTable cafeTableByID(Long cafeTableID);
 
-	CafeTable createcafeTable(CafeTable cafeTable);
+	public CafeTable createcafeTable(CafeTable cafeTable);
 
 
-	List<CafeTable> getallCafeTable();
+	public List<CafeTable> getallCafeTable();
 
-	CafeTable updateCafeTable(CafeTable cafeTable);
+	public CafeTable updateCafeTable(CafeTable cafeTable);
 	
 	public List<CafeTable>availableTables(List<Long>arr);
+	
+	public void deleteCafeTable(long id);
 
+	
 	
 	
 

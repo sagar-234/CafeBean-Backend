@@ -71,4 +71,12 @@ public class CafeTableServiceImpl implements CafeTableService{
 	{
 		return cafeTableDao.findAll().stream().filter(i->!arr.contains(i.getTableId())).collect(Collectors.toList());
 	}
+
+	@Override
+	public void deleteCafeTable(long id) {
+		// TODO Auto-generated method stub
+		
+		cafeTableDao.deleteById(id);
+		
+	}
 }

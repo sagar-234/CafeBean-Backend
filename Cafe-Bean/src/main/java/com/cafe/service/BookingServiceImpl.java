@@ -71,6 +71,11 @@ public class BookingServiceImpl implements BookingService{
 		return tableIds;
 		
 	}
+	
+	public List<Booking>getAllBookings()
+	{
+		return bookingdao.findAll();
+	}
 
 	
 	

@@ -62,5 +62,11 @@ public class CoffeeServiceImpl implements CoffeeService{
 		// TODO Auto-generated method stub
 		return coffeeDao.findAll();
 	}
+	
+	public void deleteCoffee(long id)
+	{
+		
+		coffeeDao.deleteById(id);
+	}
 
 }

@@ -47,6 +47,14 @@ public class BookingController {
 		return bookingservice.GetAllTheBookingOfUser(id);
 	}
 	
+	@GetMapping("/fetch")
+	public List<Booking> getAllBookings()
+	{
+		logger.info("Retrieving List of All Bookings of a User");
+		return bookingservice.getAllBookings();
+	}
+	
+	
 	@GetMapping("/getBookings")
 	public Set<Long> getAllBookingsOfUser(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd")  Date date,@RequestParam LocalTime starttime)
 	{

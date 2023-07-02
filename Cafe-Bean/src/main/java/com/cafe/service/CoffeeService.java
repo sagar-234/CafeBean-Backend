@@ -7,12 +7,14 @@ import com.cafe.entity.Coffee;
 public interface CoffeeService {
 
 
-	Coffee createcoffee(Coffee coffee);
+	public Coffee createcoffee(Coffee coffee);
 
-	Coffee updateCoffee(Coffee coffee);
+	public Coffee updateCoffee(Coffee coffee);
 
-	List<Coffee> getallCoffee();
+	public List<Coffee> getallCoffee();
 
-	Coffee getCoffeByID(Long coffeeID);
+	public Coffee getCoffeByID(Long coffeeID);
+	public void deleteCoffee(long id);
+
 
 }
