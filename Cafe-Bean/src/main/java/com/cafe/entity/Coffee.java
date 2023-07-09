@@ -6,27 +6,30 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name="coffee")
 
 public class Coffee {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="coffee_id",nullable=false)
+	@Column(name="coffee_id")
 	private Long coffee_id;
 	
-	@Column(name="coffee_type",nullable=false)
+	@Column(name="coffee_type")
+	@NotEmpty(message = "Please Enter the Coffee Type")
+	@Length(min = 4, message = "Size of Coffee Type must be greater than or equal to 4 characters")
 	private String coffee_type;
 	
-	@Column(name="coffee_price",nullable=false)
+	@Column(name="coffee_price")
+	@NotNull(message = "Please Enter the Price")
 	private Long price;
 
 	public Coffee() {

@@ -2,6 +2,7 @@ package com.cafe.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,14 @@ public class CoffeeController {
 	}
 	
 	@PutMapping("/updateCoffee")
-	public void updateCoffee(@RequestBody Coffee coffee)
+	public void updateCoffee(@Valid @RequestBody Coffee coffee)
 	{
 		logger.info("Updating coffee");
 		coffeeservice.updateCoffee(coffee);
 	}
     
 	@PostMapping("/createCoffee")
-	public void createCoffee(@RequestBody Coffee coffee)
+	public void createCoffee(@Valid @RequestBody Coffee coffee)
 	{
 		logger.info("Creating coffee");
 		coffeeservice.createcoffee(coffee);

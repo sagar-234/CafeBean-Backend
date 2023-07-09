@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class BookingController {
 	private Logger logger = LoggerFactory.getLogger(Logger.class);
 	
 	@PostMapping("/addBooking")
-	public Booking addBooking(@RequestBody BookingDto booking)
+	public Booking addBooking( @RequestBody BookingDto booking)
 	{
 		logger.info("Creating a new Booking");
 		return bookingservice.BookTableForUser(booking);

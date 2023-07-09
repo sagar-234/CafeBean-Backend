@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="cafeTable")
@@ -15,7 +17,8 @@ public class CafeTable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long tableId;
 	
-	@Column(name = "capacity",nullable=false)
+	@Column(name = "capacity")
+	@NotNull(message = "Please Enter the Seating Capacity")
 	private Integer seatingCapacity;
 
 	public CafeTable() {

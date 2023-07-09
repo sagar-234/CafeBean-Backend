@@ -12,6 +12,7 @@ import java.util.Set;
 import java.text.SimpleDateFormat;
 
 
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,13 +64,13 @@ public class CafeTableController {
 	}
 	
 	@PutMapping("/updateCafeTable")
-	public void updateCafeTable(@RequestBody CafeTable cafeTable)
+	public void updateCafeTable(@Valid @RequestBody CafeTable cafeTable)
 	{
 		logger.info("Updating CafeTables");
 		cafeTableservice.updateCafeTable(cafeTable);
 	}
 	@PostMapping("/createCafeTable")
-	public void createCafeTable(@RequestBody CafeTable cafeTable)
+	public void createCafeTable(@Valid @RequestBody CafeTable cafeTable)
 	{
 		logger.info("Creating cafeTables");
 		cafeTableservice.createcafeTable(cafeTable);

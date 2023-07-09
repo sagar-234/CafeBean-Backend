@@ -7,6 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="coffeeItem")
@@ -21,10 +24,13 @@ public class CoffeeItem {
 	
 	
 	
-	@Column(name="cust_id",nullable = false)
+	@Column(name="cust_id")
+	@NotNull(message = "Please Enter the CUstomer ID")
 	private Long custid;
 	
-	@Column(name="quantity",nullable = false)
+	@Column(name="quantity")
+	@NotNull(message = "Please Enter the quantity")
+	@Min(value = 1, message = "Quantity should be minimum 1")
 	private Integer quantity;
 
 

@@ -8,15 +8,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-@Entity
+ @Entity
 @Table(name="booking")
 public class Booking {
 	
@@ -26,20 +25,20 @@ public class Booking {
 	private Long booking_id;
 	
 	@Column(name="Table_id")
+	@NotNull(message = "Please Enter the Table ID")
 	private Long Table_id;
 	
 	@Column(name="cust_id")
+	@NotNull(message = "Please Enter the Customer ID")
 	private Long custid;
 	
 	@Column(name="Amount")
+	@NotNull(message = "Please Enter the Amount")
 	private Long Amount;
-	
-	
-	
+
 	@Temporal(TemporalType.DATE)
+	@FutureOrPresent(message = "Please Enter the present date or future date")
 	private Date bookingdate;
-	
-	
 	
 	@Temporal(TemporalType.TIME)
     private LocalTime startTimeField;
@@ -47,16 +46,10 @@ public class Booking {
 	@Temporal(TemporalType.TIME)
     private LocalTime endTimeField;
 
-	
-	
-
 	public Booking() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-
 
 	public Booking(Long booking_id, Long table_id, Long custid, Long amount, Date bookingdate, LocalTime startTimeField,
 			LocalTime endTimeField) {
@@ -70,36 +63,21 @@ public class Booking {
 		this.endTimeField = endTimeField;
 	}
 
-
-
-
 	public Long getBooking_id() {
 		return booking_id;
 	}
-
-
-
 
 	public void setBooking_id(Long booking_id) {
 		this.booking_id = booking_id;
 	}
 
-
-
-
 	public Long getTable_id() {
 		return Table_id;
 	}
 
-
-
-
 	public void setTable_id(Long table_id) {
 		Table_id = table_id;
 	}
-
-
-
 
 	public Long getCustid() {
 		return custid;

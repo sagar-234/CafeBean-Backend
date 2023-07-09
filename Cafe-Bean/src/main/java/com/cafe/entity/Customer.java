@@ -6,12 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import org.hibernate.validator.constraints.Length;
 
 
 @Entity
@@ -23,16 +26,24 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cust_id;
 	
-	@Column(name="username",nullable=false)
+	@Column(name="username")
+	@NotEmpty(message = "Please Enter the UserName")
+	@Length(min = 5, message = "UserName Length Should consist of minimum 5 characters")
 	private String username;
 	
-	@Column(name="password",nullable=false)
+	@Column(name="password")
+	@NotEmpty
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$", message = "password must be min 8 and max 16 length containing atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit ")
+	@Length(min = 8, max = 16)
 	private String password;
 	
-	@Column(name="email",nullable=false)
+	@Column(name="email")
+	@Email(message = "Please Enter the Valid Email")
 	private String email;
 	
-	@Column(name="phone",nullable=false)
+	@Column(name="phone")
+	@Length(min = 10)
+	@NotEmpty(message = "Mobile Number should be of minimum 10 digits")
 	private String phone;
 
 	public Customer() {

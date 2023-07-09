@@ -2,6 +2,7 @@ package com.cafe.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class CustomerController {
 	private Logger logger = LoggerFactory.getLogger(Logger.class);
 	
 	@PostMapping("/createUser")
-	public ResponseEntity<Customer> createUser(@RequestBody Customer customer)
+	public ResponseEntity<Customer> createUser(@Valid  @RequestBody Customer customer)
 	{
 		logger.info("Creating a new User");
 		return new ResponseEntity<Customer>(customerService.createCustomer(customer),HttpStatus.OK);
